@@ -1,0 +1,13 @@
+# Target labels
+ EP_libphidget21
+# Source files and their labels
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/CMakeFiles/EP_libphidget21
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/CMakeFiles/EP_libphidget21.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/CMakeFiles/EP_libphidget21-complete.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-install.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-mkdir.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-download.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-update.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-patch.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-configure.rule
+/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build/phidgets_drivers/libphidget21/EP_libphidget21-prefix/src/EP_libphidget21-stamp/EP_libphidget21-build.rule

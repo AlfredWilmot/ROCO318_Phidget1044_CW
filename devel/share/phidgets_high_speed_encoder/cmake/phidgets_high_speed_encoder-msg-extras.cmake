@@ -1,0 +1,2 @@
+set(phidgets_high_speed_encoder_MESSAGE_FILES "/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/phidgets_drivers/phidgets_high_speed_encoder/msg/EncoderDecimatedSpeed.msg")
+set(phidgets_high_speed_encoder_SERVICE_FILES "")

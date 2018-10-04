@@ -1,0 +1,8 @@
+prefix=/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/devel
+
+Name: phidgets_api
+Description: Description of phidgets_api
+Version: 0.7.7
+Cflags: -I/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/phidgets_drivers/phidgets_api/include
+Libs: -L/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/devel/lib -lphidgets_api
+Requires: libphidget21
