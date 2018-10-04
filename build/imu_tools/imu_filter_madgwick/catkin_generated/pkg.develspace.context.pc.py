@@ -5,4 +5,4 @@ PROJECT_CATKIN_DEPENDS = "roscpp;sensor_msgs;geometry_msgs;tf2_ros;tf2_geometry_
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-limu_filter;-limu_filter_nodelet;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;/usr/lib/x86_64-linux-gnu/libboost_signals.so;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;/usr/lib/x86_64-linux-gnu/libpthread.so".split(';') if "-limu_filter;-limu_filter_nodelet;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;/usr/lib/x86_64-linux-gnu/libboost_signals.so;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;/usr/lib/x86_64-linux-gnu/libpthread.so" != "" else []
 PROJECT_NAME = "imu_filter_madgwick"
 PROJECT_SPACE_DIR = "/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/devel"
-PROJECT_VERSION = "1.0.15"
+PROJECT_VERSION = "1.1.6"

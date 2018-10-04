@@ -1,5 +1,5 @@
 set(_CATKIN_CURRENT_PACKAGE "imu_tools")
-set(imu_tools_VERSION "1.0.15")
+set(imu_tools_VERSION "1.1.6")
 set(imu_tools_MAINTAINER "Martin Günther <martin.guenther1980@gmail.com>, Ivan Dryanovski <ivan.dryanovski@gmail.com>")
 set(imu_tools_PACKAGE_FORMAT "1")
 set(imu_tools_BUILD_DEPENDS )

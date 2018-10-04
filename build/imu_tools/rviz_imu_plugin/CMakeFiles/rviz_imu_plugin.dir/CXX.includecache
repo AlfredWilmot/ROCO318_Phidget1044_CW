@@ -39,6 +39,10 @@ QColor
 /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/imu_tools/rviz_imu_plugin/src/imu_axes_visual.cpp
 imu_axes_visual.h
 /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/imu_tools/rviz_imu_plugin/src/imu_axes_visual.h
+ros/ros.h
+-
+cmath
+-
 
 /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/imu_tools/rviz_imu_plugin/src/imu_axes_visual.h
 sensor_msgs/Imu.h
@@ -101,6 +105,10 @@ imu_acc_visual.h
 /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/imu_tools/rviz_imu_plugin/src/imu_orientation_visual.cpp
 imu_orientation_visual.h
 /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/imu_tools/rviz_imu_plugin/src/imu_orientation_visual.h
+ros/ros.h
+-
+cmath
+-
 
 /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/src/imu_tools/rviz_imu_plugin/src/imu_orientation_visual.h
 sensor_msgs/Imu.h

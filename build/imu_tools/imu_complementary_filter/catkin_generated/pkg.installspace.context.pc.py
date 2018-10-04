@@ -5,4 +5,4 @@ PROJECT_CATKIN_DEPENDS = "message_filters;roscpp;sensor_msgs;std_msgs;tf".replac
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-lcomplementary_filter".split(';') if "-lcomplementary_filter" != "" else []
 PROJECT_NAME = "imu_complementary_filter"
 PROJECT_SPACE_DIR = "/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/install"
-PROJECT_VERSION = "1.0.15"
+PROJECT_VERSION = "1.1.6"

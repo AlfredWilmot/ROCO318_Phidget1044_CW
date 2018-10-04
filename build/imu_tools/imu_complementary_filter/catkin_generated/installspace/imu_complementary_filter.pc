@@ -2,7 +2,7 @@ prefix=/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/install
 
 Name: imu_complementary_filter
 Description: Description of imu_complementary_filter
-Version: 1.0.15
+Version: 1.1.6
 Cflags: -I/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/install/include
 Libs: -L/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/install/lib -lcomplementary_filter
 Requires: message_filters roscpp sensor_msgs std_msgs tf
