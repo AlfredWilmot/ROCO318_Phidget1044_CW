@@ -78,6 +78,17 @@ install/local/fast: install/local
 
 .PHONY : install/local/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -109,17 +120,6 @@ install/strip: preinstall
 install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
 
 # Special rule for the target install
 install: preinstall
@@ -166,36 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-run_tests_phidgets_imu_roslaunch-check_launch: phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
-
-.PHONY : run_tests_phidgets_imu_roslaunch-check_launch
-
-# fast build rule for target.
-run_tests_phidgets_imu_roslaunch-check_launch/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/build
-.PHONY : run_tests_phidgets_imu_roslaunch-check_launch/fast
-
-# Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule
-
-# Convenience name for target.
-_run_tests_phidgets_imu_roslaunch-check: phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule
-
-.PHONY : _run_tests_phidgets_imu_roslaunch-check
-
-# fast build rule for target.
-_run_tests_phidgets_imu_roslaunch-check/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/build
-.PHONY : _run_tests_phidgets_imu_roslaunch-check/fast
-
-# Convenience name for target.
 phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule:
 	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
 .PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/rule
@@ -209,36 +179,6 @@ diagnostic_msgs_generate_messages_py: phidgets_drivers/phidgets_imu/CMakeFiles/d
 diagnostic_msgs_generate_messages_py/fast:
 	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build
 .PHONY : diagnostic_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
-
-# Convenience name for target.
-_run_tests_phidgets_imu_roslaunch-check_launch: phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
-
-.PHONY : _run_tests_phidgets_imu_roslaunch-check_launch
-
-# fast build rule for target.
-_run_tests_phidgets_imu_roslaunch-check_launch/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/build
-.PHONY : _run_tests_phidgets_imu_roslaunch-check_launch/fast
-
-# Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-diagnostic_msgs_generate_messages_nodejs: phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : diagnostic_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-diagnostic_msgs_generate_messages_nodejs/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build
-.PHONY : diagnostic_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 phidgets_drivers/phidgets_imu/CMakeFiles/phidgets_imu.dir/rule:
@@ -286,49 +226,34 @@ diagnostic_msgs_generate_messages_lisp/fast:
 .PHONY : diagnostic_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
+phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
+.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
-std_srvs_generate_messages_nodejs: phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
+diagnostic_msgs_generate_messages_nodejs: phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/rule
 
-.PHONY : std_srvs_generate_messages_nodejs
+.PHONY : diagnostic_msgs_generate_messages_nodejs
 
 # fast build rule for target.
-std_srvs_generate_messages_nodejs/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build
-.PHONY : std_srvs_generate_messages_nodejs/fast
+diagnostic_msgs_generate_messages_nodejs/fast:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build
+.PHONY : diagnostic_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_eus.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
+phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
+.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
 
 # Convenience name for target.
-std_srvs_generate_messages_eus: phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
+_run_tests_phidgets_imu_roslaunch-check_launch: phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
 
-.PHONY : std_srvs_generate_messages_eus
+.PHONY : _run_tests_phidgets_imu_roslaunch-check_launch
 
 # fast build rule for target.
-std_srvs_generate_messages_eus/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_eus.dir/build
-.PHONY : std_srvs_generate_messages_eus/fast
-
-# Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_lisp: phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
-
-.PHONY : std_srvs_generate_messages_lisp
-
-# fast build rule for target.
-std_srvs_generate_messages_lisp/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
-.PHONY : std_srvs_generate_messages_lisp/fast
+_run_tests_phidgets_imu_roslaunch-check_launch/fast:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check_launch.dir/build
+.PHONY : _run_tests_phidgets_imu_roslaunch-check_launch/fast
 
 # Convenience name for target.
 phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check.dir/rule:
@@ -376,21 +301,6 @@ diagnostic_msgs_generate_messages_eus/fast:
 .PHONY : diagnostic_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_cpp: phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-
-.PHONY : std_srvs_generate_messages_cpp
-
-# fast build rule for target.
-std_srvs_generate_messages_cpp/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
-.PHONY : std_srvs_generate_messages_cpp/fast
-
-# Convenience name for target.
 phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu.dir/rule:
 	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu.dir/rule
 .PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu.dir/rule
@@ -404,21 +314,6 @@ run_tests_phidgets_imu: phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidg
 run_tests_phidgets_imu/fast:
 	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu.dir/build
 .PHONY : run_tests_phidgets_imu/fast
-
-# Convenience name for target.
-phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_py.dir/rule:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_py: phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-
-.PHONY : std_srvs_generate_messages_py
-
-# fast build rule for target.
-std_srvs_generate_messages_py/fast:
-	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_py.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/std_srvs_generate_messages_py.dir/build
-.PHONY : std_srvs_generate_messages_py/fast
 
 # Convenience name for target.
 phidgets_drivers/phidgets_imu/CMakeFiles/phidgets_imu_nodelet.dir/rule:
@@ -464,6 +359,36 @@ _run_tests_phidgets_imu: phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phi
 _run_tests_phidgets_imu/fast:
 	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu.dir/build
 .PHONY : _run_tests_phidgets_imu/fast
+
+# Convenience name for target.
+phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
+.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
+
+# Convenience name for target.
+run_tests_phidgets_imu_roslaunch-check_launch: phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/rule
+
+.PHONY : run_tests_phidgets_imu_roslaunch-check_launch
+
+# fast build rule for target.
+run_tests_phidgets_imu_roslaunch-check_launch/fast:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/run_tests_phidgets_imu_roslaunch-check_launch.dir/build
+.PHONY : run_tests_phidgets_imu_roslaunch-check_launch/fast
+
+# Convenience name for target.
+phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f CMakeFiles/Makefile2 phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule
+.PHONY : phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule
+
+# Convenience name for target.
+_run_tests_phidgets_imu_roslaunch-check: phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/rule
+
+.PHONY : _run_tests_phidgets_imu_roslaunch-check
+
+# fast build rule for target.
+_run_tests_phidgets_imu_roslaunch-check/fast:
+	cd /home/alfie/ROCO_318/ROCO318_Phidget1044_CW/build && $(MAKE) -f phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/build.make phidgets_drivers/phidgets_imu/CMakeFiles/_run_tests_phidgets_imu_roslaunch-check.dir/build
+.PHONY : _run_tests_phidgets_imu_roslaunch-check/fast
 
 src/imu_ros_i.o: src/imu_ros_i.cpp.o
 
@@ -554,31 +479,26 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... install/local"
+	@echo "... test"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
-	@echo "... install/strip"
-	@echo "... run_tests_phidgets_imu_roslaunch-check_launch"
-	@echo "... _run_tests_phidgets_imu_roslaunch-check"
 	@echo "... diagnostic_msgs_generate_messages_py"
-	@echo "... _run_tests_phidgets_imu_roslaunch-check_launch"
-	@echo "... diagnostic_msgs_generate_messages_nodejs"
+	@echo "... install/strip"
 	@echo "... phidgets_imu"
 	@echo "... phidgets_imu_node"
 	@echo "... diagnostic_msgs_generate_messages_lisp"
-	@echo "... std_srvs_generate_messages_nodejs"
-	@echo "... test"
-	@echo "... std_srvs_generate_messages_eus"
-	@echo "... std_srvs_generate_messages_lisp"
+	@echo "... diagnostic_msgs_generate_messages_nodejs"
+	@echo "... _run_tests_phidgets_imu_roslaunch-check_launch"
 	@echo "... run_tests_phidgets_imu_roslaunch-check"
 	@echo "... diagnostic_msgs_generate_messages_cpp"
 	@echo "... diagnostic_msgs_generate_messages_eus"
 	@echo "... install"
-	@echo "... std_srvs_generate_messages_cpp"
 	@echo "... run_tests_phidgets_imu"
-	@echo "... std_srvs_generate_messages_py"
 	@echo "... phidgets_imu_nodelet"
 	@echo "... clean_test_results_phidgets_imu"
 	@echo "... _run_tests_phidgets_imu"
+	@echo "... run_tests_phidgets_imu_roslaunch-check_launch"
+	@echo "... _run_tests_phidgets_imu_roslaunch-check"
 	@echo "... src/imu_ros_i.o"
 	@echo "... src/imu_ros_i.i"
 	@echo "... src/imu_ros_i.s"

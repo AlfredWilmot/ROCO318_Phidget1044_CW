@@ -1,0 +1,8 @@
+prefix=/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/install
+
+Name: cw_code
+Description: Description of cw_code
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/alfie/ROCO_318/ROCO318_Phidget1044_CW/install/lib 
+Requires: 
