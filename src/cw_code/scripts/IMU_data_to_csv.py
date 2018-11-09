@@ -67,11 +67,8 @@ def print_imu_analytics(IMU_obj):
 #####################################################################
 ##-- CREATES CSV FILES, FOR EACH SET OF FREQUENCIES IN THE SWEEP. --#
 #########################################################################
-def gather_data(data_interval, interval_step, max_samples, axis, IMU_id, dir_path):
+def prepare_test(data_interval, interval_step, max_samples, IMU_id, dir_path):
 #########################################################################
-
-#-- converting selected axis to value: [0, 1, 2] = [x, y, z] --#
-    axis_index = {'x': 0, 'y': 1, 'z': 2}[axis]
 
 
 ##-- Initialize time-stamp --#
@@ -79,46 +76,66 @@ def gather_data(data_interval, interval_step, max_samples, axis, IMU_id, dir_pat
 
 #-- Creating a new IMU object, with a new data_interval --#
     IMU_obj = make_acceleromter_obj(data_interval)
-    
 
-#-- Sweep through sampling frequencies, starting at lowest data interval (4ms), ending near highest (1000ms) --#
-    for dt_intv in range(data_interval, 1000, interval_step):
-    
-    #-- List stores time against sampled data (reset for each round in for-loop)--#
-        time_and_data = []
 
-    #-- Adjusting IMU data_interval --#
-        IMU_obj.setDataInterval(dt_intv)
+#-- Single frequency sampling case. --#
+    if interval_step == 0:
 
-    ############################################
-        while(len(time_and_data) < max_samples):
-        
-        #-- storing data & time-stamp temporarily --#
-            tmp_data        =    IMU_obj.getAcceleration()[axis_index]
-            tmp_time_stamp  =    IMU_obj.getTimestamp()
+        gather_and_store_data(IMU_obj, data_interval, max_samples, IMU_id, dir_path)
 
-            #print("Linear x acceleration: {}g".format(tmp_data))
-            #print("Timestamp: {}".format(tmp_time_stamp))
+#-- Frequency sweep case. --#
+    else: 
 
-        #-- Adding info to the list --#
-            time_and_data.append([tmp_time_stamp, tmp_data])
+    #-- Sweep through sampling frequencies, starting at lowest data interval (4ms), ending near highest (1000ms) --#
+        for dt_intv in range(data_interval, 1000, interval_step):
+            
+            gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path)
 
-        #-- waiting until ready to store next sample --#
-            time.sleep(dt_intv*10**(-3))
-    ############################################
-
-    #-- Prepare data-frame (trimming first few values)--#
-        trim = 5
-        df = pd.DataFrame(time_and_data[trim:], columns=["TimeStamp_(ms)", "Acceleration_(g)"])
-
-    #-- Store data-frame --#
-        output_csv_name = "imuID_{} {}_axis samplingRate_{}ms".format(IMU_id, axis, dt_intv)
-    
-        print("\n\n{}\n\n".format(output_csv_name))
-
-        df.to_csv(dir_path + output_csv_name + ".csv", index=False)
 ######################################################################
     
+
+
+
+
+
+############################################################################
+def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
+############################################################################
+
+#-- List stores time against sampled data (reset for each round in for-loop)--#
+    time_and_data = []
+
+#-- Adjusting IMU data_interval --#
+    IMU_obj.setDataInterval(dt_intv)
+
+#-- First few values will be trimmed so dataset represents a stable signal --# 
+    trim = 5
+
+############################################
+    while(len(time_and_data) < max_samples + trim):
+    
+    #-- storing data & time-stamp temporarily --#
+        tmp_data        =    IMU_obj.getAcceleration()
+        tmp_time_stamp  =    IMU_obj.getTimestamp()
+
+    #-- Adding info to the list --#
+        time_and_data.append([tmp_time_stamp, tmp_data])
+
+    #-- waiting until ready to store next sample --#
+        time.sleep(dt_intv*10**(-3))
+############################################
+
+#-- Prepare data-frame (trimming first few values)--#
+    df = pd.DataFrame(time_and_data[trim:], columns=["TimeStamp_(ms)", ["acc(_x_(g)", "acc_y_(g)", "acc_z_(g)"]])
+
+#-- Store data-frame --#
+    output_csv_name = "imuID_{} samplingRate_{}ms".format(IMU_id, dt_intv)
+
+    print("\n\n{}\n\n".format(output_csv_name))
+
+    df.to_csv(dir_path + output_csv_name + ".csv", index=False)
+############################################################################
+
 
 
 
@@ -129,14 +146,22 @@ def gather_data(data_interval, interval_step, max_samples, axis, IMU_id, dir_pat
 ##-- Returns the expected duration of the experiment --##
 ####################################################################################################
 def calc_experiment_duration(min_data_interval, max_data_interval, interval_step, samples_per_step):
-    #sampling interval * sampling frequency.
-    tmp = np.array(range(min_data_interval, max_data_interval, interval_step))
-    tmp = tmp*samples_per_step
-    tmp = int(tmp.sum() * (10**-3)/60)
+    
+    #-- Single frequency sampling case. --#
+    if (interval_step == 0):
+
+        tmp = min_data_interval * samples_per_step * (10**-3)/60
+
+    #-- Frequency sweep case. --#
+    else:
+    
+        tmp = np.array(range(min_data_interval, max_data_interval, interval_step))
+        tmp = tmp*samples_per_step
+        tmp = int(tmp.sum() * (10**-3)/60)
     
     print("The experiment will last {} minutes".format(tmp))
 
-    query = raw_input("\n\nCONTNIUE (y/n)?  ")
+    query = raw_input("\n\nCONTINUE (y/n)?  ")
 
     if query == 'y':
         pass
@@ -184,24 +209,46 @@ def mkdir_if_empty(dir_path):
 def main():
     try:
         
-        data_interval       = 4     #4ms = lowest data_interval, 1000ms = greatest data interval.
-        max_samples         = int( input("Input the desired number of samples for a given frequency: " ))
-        interval_step       = int( input("Input interval-step (multiple of 4): "))
-        IMU_ID              = str( input("Input the ID given to the IMU (check underside): "))
-        axis_of_interest    = raw_input("Input the axis under test: ")        
-
-
-        calc_experiment_duration(4 ,1000, interval_step, max_samples)
-
-        dir_path = "csv_data/IMU_ID_{}/{}_axis/".format(IMU_ID, axis_of_interest)
         
-        mkdir_if_empty(dir_path)
+            usr_select = int(input("Select Experiment mode:\n(1) Single Frequency\n(2) Frequency Sweep\n... "))
 
-        gather_data(data_interval, interval_step, max_samples, axis_of_interest, IMU_ID, dir_path)
 
-        
-        
-        return 0
+            if (usr_select == 1):
+                data_interval = int(input("Designate single IMU data sampling rate within range [4ms, 1000ms], in steps of 4ms\n... "))
+                interval_step = 0   #Used to indicate that only want to test single sampling frequency.  
+            elif (usr_select == 2):
+                data_interval = 4   #4ms = lowest data_interval, 1000ms = greatest data interval.
+                interval_step = int( input("Input interval-step (multiple of 4)\n... "))
+            else:
+                print("\nInvalid option. elect either '1' or '2'.\n")
+                return -1
+            
+            max_samples         = int( input("Input the desired number of samples for a given frequency\n... " ))
+            IMU_ID              = str( input("Input the ID given to the IMU (check underside)\n... "))
+            test_ID             = raw_input("Input a unique ID for this test\n... ")        
+
+
+            calc_experiment_duration(data_interval ,1000, interval_step, max_samples)
+
+            dir_path = "csv_data/IMU_ID_{}/test_{}/".format(IMU_ID, test_ID)
+            
+            mkdir_if_empty(dir_path)
+
+
+            #-- User can repeat the last defined experiment if desired --#
+            repeat = 'y'
+
+            while (repeat == 'y'):
+
+                prepare_test(data_interval, interval_step, max_samples, IMU_ID, dir_path)
+                repeat = raw_input("Repeat the same experiment (y/n)?\n**WILL OVERWRITE PREVIOUS EXPERIMENT DATA**\n... ")
+
+                if (repeat !='y'):
+                    return 0
+                else:
+                    pass 
+    
+            return 0
 
 
 
