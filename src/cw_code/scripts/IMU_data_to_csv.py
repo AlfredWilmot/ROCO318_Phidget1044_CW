@@ -119,14 +119,14 @@ def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
         tmp_time_stamp  =    IMU_obj.getTimestamp()
 
     #-- Adding info to the list --#
-        time_and_data.append([tmp_time_stamp, tmp_data])
-
+        time_and_data.append([tmp_time_stamp, tmp_data[0], tmp_data[1], tmp_data[2]])
+        #print(str(time_and_data))
     #-- waiting until ready to store next sample --#
         time.sleep(dt_intv*10**(-3))
 ############################################
 
 #-- Prepare data-frame (trimming first few values)--#
-    df = pd.DataFrame(time_and_data[trim:], columns=["TimeStamp_(ms)", ["acc(_x_(g)", "acc_y_(g)", "acc_z_(g)"]])
+    df = pd.DataFrame(time_and_data[trim:], columns=["TimeStamp_(ms)", "acc(_x_(g)", "acc_y_(g)", "acc_z_(g)"])
 
 #-- Store data-frame --#
     output_csv_name = "imuID_{} samplingRate_{}ms".format(IMU_id, dt_intv)
