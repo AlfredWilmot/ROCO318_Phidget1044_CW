@@ -230,7 +230,7 @@ def main():
 
             calc_experiment_duration(data_interval ,1000, interval_step, max_samples)
 
-            dir_path = "csv_data/IMU_ID_{}/test_{}/".format(IMU_ID, test_ID)
+            dir_path = "csv_data/IMU_ID_{}/{}/".format(IMU_ID, test_ID)
             
             mkdir_if_empty(dir_path)
 
