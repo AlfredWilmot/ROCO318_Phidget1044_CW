@@ -42,6 +42,10 @@ def make_acceleromter_obj(data_interval):
 
 
 
+
+##############################################################
+#-- prints some basic info about the connected Phidget IMU --#
+#############################################################
 def print_imu_analytics(IMU_obj):
 
     
@@ -57,19 +61,16 @@ def print_imu_analytics(IMU_obj):
     print("Current data Interval set to: {} ms".format(current_data_interval))
     print("Min acceleration (according to SDK): {} g".format(min_acceleration))
     print("Max acceleration (according to SDK): {} g".format(mac_acceleration))
-
-    
-
+#############################################################
 
 
 
 
-#####################################################################
-##-- CREATES CSV FILES, FOR EACH SET OF FREQUENCIES IN THE SWEEP. --#
-#########################################################################
+
+##############################################################################
+##-- Preliminary experiment code: deliniates between single-f, and f-sweep --#
+##############################################################################
 def prepare_test(data_interval, interval_step, max_samples, IMU_id, dir_path):
-#########################################################################
-
 
 ##-- Initialize time-stamp --#
     tmp_time_stamp = 0
@@ -92,15 +93,15 @@ def prepare_test(data_interval, interval_step, max_samples, IMU_id, dir_path):
             gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path)
 
 ######################################################################
+  
+    
     
 
 
-
-
-
-############################################################################
+#####################################################################################################
+##-- Core Experiment code, stores realtime data in an array, then generates a csv from that data --##
+#####################################################################################################
 def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
-############################################################################
 
 #-- List stores time against sampled data (reset for each round in for-loop)--#
     time_and_data = []
@@ -111,7 +112,7 @@ def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
 #-- First few values will be trimmed so dataset represents a stable signal --# 
     trim = 5
 
-############################################
+    ############################################
     while(len(time_and_data) < max_samples + trim):
     
     #-- storing data & time-stamp temporarily --#
@@ -123,7 +124,7 @@ def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
         #print(str(time_and_data))
     #-- waiting until ready to store next sample --#
         time.sleep(dt_intv*10**(-3))
-############################################
+    ############################################
 
 #-- Prepare data-frame (trimming first few values)--#
     df = pd.DataFrame(time_and_data[trim:], columns=["TimeStamp_(ms)", "acc(_x_(g)", "acc_y_(g)", "acc_z_(g)"])
@@ -134,9 +135,7 @@ def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
     print("\n\n{}\n\n".format(output_csv_name))
 
     df.to_csv(dir_path + output_csv_name + ".csv", index=False)
-############################################################################
-
-
+#####################################################################################################
 
 
 
@@ -144,7 +143,7 @@ def gather_and_store_data(IMU_obj, dt_intv, max_samples, IMU_id, dir_path):
 
 #########################################################
 ##-- Returns the expected duration of the experiment --##
-####################################################################################################
+#########################################################
 def calc_experiment_duration(min_data_interval, max_data_interval, interval_step, samples_per_step):
     
     #-- Single frequency sampling case. --#
@@ -167,8 +166,9 @@ def calc_experiment_duration(min_data_interval, max_data_interval, interval_step
         pass
     else:
         raise ValueError("\n\nUser has aborted the experiment as it will take too long.\n\n")
+#########################################################
 
-#####################################################################################################
+
 
 
 
