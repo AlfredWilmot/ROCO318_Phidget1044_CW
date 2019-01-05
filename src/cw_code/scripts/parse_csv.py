@@ -92,15 +92,20 @@ def generate_stats_plots(fldr_pth):
         sigmas_y.append(np.std(y_sorted))
         sigmas_z.append(np.std(z_sorted))
 
+
+    #-- Frequency values sewpt through in the experiment --#
+    step = 40 # step can be inferred from the csv file
+    x_axis = list(range(4,1000,step)) 
+
     #-- Plot for each axis within same window (regardless of axis of interest) [rows,col,index]--#
     plt.subplot(311)
-    plt.plot(sigmas_x, ".")
+    plt.plot(x_axis, mu_x, ".")
 
     plt.subplot(312)
-    plt.plot(sigmas_y, ".")
+    plt.plot(x_axis, mu_y, ".")
 
     plt.subplot(313)
-    plt.plot(sigmas_z, ".")
+    plt.plot(x_axis, mu_z, ".")
 
     plt.show()
 
