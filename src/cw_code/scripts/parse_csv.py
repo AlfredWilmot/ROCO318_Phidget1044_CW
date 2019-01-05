@@ -98,59 +98,113 @@ def generate_stats_plots(fldr_pth):
     step = 40 # step can be inferred from the csv file
     f_sweep = list(range(4,1000,step)) 
 
+
+
+
+
+
+
     #-- Plot for each axis within same window (regardless of axis of interest) [rows,col,index]--#
 
+    # Global rule to prevent any use of offsets in any axis 
     mtplt.rcParams["axes.formatter.useoffset"] = False
 
-    #-- x-axis --#
-    plt.subplot(311)
+    # Defining figure parameters 
+    fig = plt.figure(num=None, figsize=(12, 10), dpi=80, facecolor='w', edgecolor='k')
 
-    plt.xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
-    plt.ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
-    plt.title("x-axis", fontsize = 25)
+    # Add overarching title describing the nature of the test associated with the data in the subplots
+    fig.suptitle(fldr_pth.split("/")[-2], fontsize=20, fontweight='bold')
 
-    plt.margins(x=0.1, y=0.05) 
+
+
+    #----------------#
+    #-- IMU_x axis --#
+    #----------------#
+    ax1 = fig.add_subplot(311)
+
+    # x & y axis labels 
+    ax1.set_xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15, horizontalalignment='right')
+    ax1.set_ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
+
+    # Text on subplot indicating which IMU axis is being described.
+    ax1.text(0.98, 0.03, '$IMU_x$',
+        verticalalignment='bottom', horizontalalignment='right',
+        transform=ax1.transAxes,
+        color='green', fontsize=20, fontweight='bold')
+
+    # Dilate subplot viewing window
+    ax1.margins(x=0.1, y=0.05) 
     
+    # Plot the means using the std-devs as error bars 
     sigmas_x = np.array(sigmas_x)
-    plt.errorbar(f_sweep, mu_x, sigmas_x, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
+    ax1.errorbar(f_sweep, mu_x, sigmas_x, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
 
-    #-- y-axis --#
-    plt.subplot(312)
 
-    plt.xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
-    plt.ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
-    plt.title("y-axis", fontsize = 25)
 
-    plt.margins(x=0.1, y=0.05) 
+    #----------------#
+    #-- IMU_y axis --#
+    #----------------#
+    ax2 = fig.add_subplot(312)
 
-    # y_formatter = ticker.ScalarFormatter(useOffset=False)
-    # ax.yaxis.set_major_formatter(y_formatter)
+    # x & y axis labels 
+    ax2.set_xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
+    ax2.set_ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
 
+    # Text on subplot indicating which IMU axis is being described.
+    ax2.text(0.98, 0.03, '$IMU_y$',
+        verticalalignment='bottom', horizontalalignment='right',
+        transform=ax2.transAxes,
+        color='green', fontsize=20, fontweight='bold')
+
+    # Dilate subplot viewing window
+    ax2.margins(x=0.1, y=0.05) 
+
+    # Plot the means using the std-devs as error bars 
     sigmas_y = np.array(sigmas_y)
-    plt.errorbar(f_sweep, mu_y, sigmas_y, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
-
-    
+    ax2.errorbar(f_sweep, mu_y, sigmas_y, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
 
 
 
-    #-- z-axis --#
-    plt.subplot(313)
+    #----------------#
+    #-- IMU_z axis --#
+    #----------------#
+    ax3 = fig.add_subplot(313)
 
-    plt.xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
-    plt.ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
-    plt.title("z-axis", fontsize = 25)
+    # x & y axis labels 
+    ax3.set_xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
+    ax3.set_ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
 
-    plt.margins(x=0.1, y=0.05) 
+    # Text on subplot indicating which IMU axis is being described.
+    ax3.text(0.98, 0.03, '$IMU_z$',
+        verticalalignment='bottom', horizontalalignment='right',
+        transform=ax3.transAxes,
+        color='green', fontsize=20, fontweight='bold')
 
+    # Dilate subplot viewing window
+    ax3.margins(x=0.1, y=0.05) 
+
+    # Plot the means using the std-devs as error bars 
     sigmas_z = np.array(sigmas_z)
-    plt.errorbar(f_sweep, mu_z, sigmas_z, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
+    ax3.errorbar(f_sweep, mu_z, sigmas_z, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
 
+
+
+
+    # Add some spacing between the subplots
     plt.subplots_adjust(hspace=0.6)
 
+    # Show & save plot
+    fig.show()
+    plt.savefig("./graphs/" + fldr_pth.split("/")[-2] + ".png")
 
-    plt.show()
-    #plt.savefig("./graphs/" + fldr_pth.split("/")[-2] + ".png", dpi=300)
-    #print("../../../graphs/" + fldr_pth.split("/")[-2] + ".png")
+
+
+
+
+
+
+
+
 def main():
     try:
  
