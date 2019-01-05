@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
+import matplotlib as mtplt
 
 from scipy import stats
 
@@ -22,7 +23,7 @@ import pprint
 def return_csv_dict(rltv_fldr_pth):
 
     #-- relative path to folder storing .csv files from static experiment --#
-    rltv_fldr_pth = "./csv_data/IMU_ID_1994/static_f_sweep_x_axis/"
+    #rltv_fldr_pth = "./csv_data/IMU_ID_1994/static_f_sweep_x_axis/"
 
     #-- List all files in the "folder" specified by the input args --#
     files = os.listdir(rltv_fldr_pth)
@@ -38,7 +39,7 @@ def return_csv_dict(rltv_fldr_pth):
         #pprint.pprint(filename)
 
         with open(rltv_fldr_pth + filename, "r") as csv_file:
-
+            
             # -- Split rows of CSV file
             csv_reader = csv.reader(csv_file, delimiter=',')
             
@@ -46,7 +47,7 @@ def return_csv_dict(rltv_fldr_pth):
 
             for row in csv_reader:
                 #pprint.pprint(row)
-                data_array_100_by_3.append(row[1:]) #append all usefule data collumns (exclude the first)
+                data_array_100_by_3.append(row[1:]) #append all useful data collumns (exclude the first)
 
             # Append a new Key:Value pair to the dictionary
             experiment_dict[filename] = data_array_100_by_3
@@ -95,21 +96,61 @@ def generate_stats_plots(fldr_pth):
 
     #-- Frequency values sewpt through in the experiment --#
     step = 40 # step can be inferred from the csv file
-    x_axis = list(range(4,1000,step)) 
+    f_sweep = list(range(4,1000,step)) 
 
     #-- Plot for each axis within same window (regardless of axis of interest) [rows,col,index]--#
+
+    mtplt.rcParams["axes.formatter.useoffset"] = False
+
+    #-- x-axis --#
     plt.subplot(311)
-    plt.plot(x_axis, mu_x, ".")
 
+    plt.xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
+    plt.ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
+    plt.title("x-axis", fontsize = 25)
+
+    plt.margins(x=0.1, y=0.05) 
+    
+    sigmas_x = np.array(sigmas_x)
+    plt.errorbar(f_sweep, mu_x, sigmas_x, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
+
+    #-- y-axis --#
     plt.subplot(312)
-    plt.plot(x_axis, mu_y, ".")
 
+    plt.xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
+    plt.ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
+    plt.title("y-axis", fontsize = 25)
+
+    plt.margins(x=0.1, y=0.05) 
+
+    # y_formatter = ticker.ScalarFormatter(useOffset=False)
+    # ax.yaxis.set_major_formatter(y_formatter)
+
+    sigmas_y = np.array(sigmas_y)
+    plt.errorbar(f_sweep, mu_y, sigmas_y, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
+
+    
+
+
+
+    #-- z-axis --#
     plt.subplot(313)
-    plt.plot(x_axis, mu_z, ".")
+
+    plt.xlabel("$freq$" + " " + "$(Hz)$", fontsize = 15)
+    plt.ylabel(r'$g_\mu$' + " " +"$(m/s^2)$", fontsize = 15)
+    plt.title("z-axis", fontsize = 25)
+
+    plt.margins(x=0.1, y=0.05) 
+
+    sigmas_z = np.array(sigmas_z)
+    plt.errorbar(f_sweep, mu_z, sigmas_z, linestyle = "None", marker = ".", markersize = 20, markerfacecolor = 'r' )
+
+    plt.subplots_adjust(hspace=0.6)
+
 
     plt.show()
-
-
+    #plt.savefig("./graphs/" + fldr_pth.split("/")[-2] + ".png", dpi=300)
+    #print("../../../graphs/" + fldr_pth.split("/")[-2] + ".png")
 def main():
     try:
  
@@ -117,7 +158,7 @@ def main():
         generate_stats_plots("./csv_data/IMU_ID_1994/static_f_sweep_x_axis/")
         generate_stats_plots("./csv_data/IMU_ID_1994/static_f_sweep_y_axis/")
         generate_stats_plots("./csv_data/IMU_ID_1994/static_f_sweep_z_axis/")
-        
+        #plt.show()
 
     #-- React to keyboard Interrupt --#
     except KeyboardInterrupt:
